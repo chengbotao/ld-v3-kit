@@ -1,0 +1,13 @@
+{
+    "name": "@ld-v3-kit/utils",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Vue3 utils library",
+    "main": "index.ts",
+    "module": "index.ts",
+    "types": "index.d.ts",
+    "license": "MIT",
+    "devDependencies": {
+        "vue": "catalog:"
+    }
+}

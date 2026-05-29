@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true
+  },
+  "types": [
+    "vite/client"
+  ],
+  "include": [
+    "**/*.ts",
+    ".vitepress/theme/index.ts"
+  ]
+}

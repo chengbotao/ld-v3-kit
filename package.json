@@ -1,0 +1,57 @@
+{
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "workspaces": [
+    "packages/*",
+    "docs"
+  ],
+  "scripts": {
+    "docs:dev": "pnpm --filter docs dev",
+    "docs:build": "pnpm --filter docs build",
+    "docs:preview": "pnpm --filter docs preview",
+    "commit": "git-cz",
+    "lint:fix": "eslint --fix",
+    "lint:staged": "lint-staged",
+    "lint:style:fix": "stylelint '**/*.{css,scss,vue}' --fix --allow-empty-input",
+    "preinstall": "npx only-allow pnpm",
+    "prepublishOnly": "pnpm build",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "@commitlint/cz-commitlint": "^21.0.1",
+    "@eslint/js": "^10.0.1",
+    "@ld-v3-kit/components": "workspace:^",
+    "@ld-v3-kit/composables": "workspace:^",
+    "@ld-v3-kit/styles": "workspace:^",
+    "@ld-v3-kit/utils": "workspace:^",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/node": "^25.9.1",
+    "@vue/tsconfig": "^0.9.1",
+    "element-plus": "catalog:",
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-vue": "^10.9.1",
+    "globals": "^17.6.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.5",
+    "prettier": "^3.8.3",
+    "stylelint": "^17.12.0",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-recess-order": "^7.7.0",
+    "stylelint-config-recommended-vue": "^1.6.1",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.60.0",
+    "vue": "catalog:",
+    "vue-eslint-parser": "^10.4.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "ld-v3-kit",
+    "version": "1.0.0",
+    "description": "Vue3 components library",
+    "main": "index.ts",
+    "module": "index.ts",
+    "types": "index.d.ts",
+    "license": "MIT",
+    "exports": {
+        ".": {
+            "import": "./index.ts",
+            "require": "./index.js",
+            "types": "./index.d.ts"
+        }
+    },
+    "peerDependencies": {
+        "vue": "catalog:",
+        "element-plus": "catalog:"
+    },
+    "devDependencies": {
+        "vue": "catalog:",
+        "element-plus": "catalog:"
+    }
+}

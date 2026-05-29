@@ -1,0 +1,24 @@
+{
+    "name": "@ld-v3-kit/components",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Vue3 components library",
+    "main": "index.ts",
+    "module": "index.ts",
+    "types": "index.d.ts",
+    "license": "MIT",
+    "peerDependencies": {
+        "element-plus": "catalog:",
+        "vue": "catalog:"
+    },
+    "dependencies": {
+        "@ld-v3-kit/composables": "workspace:^",
+        "@ld-v3-kit/utils": "workspace:^"
+    },
+    "devDependencies": {
+        "@element-plus/icons-vue": "^2.3.2",
+        "element-plus": "catalog:",
+        "sass-embedded": "^1.100.0",
+        "vue": "catalog:"
+    }
+}

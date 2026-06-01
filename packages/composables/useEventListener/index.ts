@@ -65,14 +65,16 @@ export function useEventListener(
       cleanup();
       if (!el) return;
       cleanups.push(
-        ...events.flatMap((event, i) => {
-          if (!mapping) {
-            return listeners.map((listener) =>
-              register(el, event, ...(listener as ListenerAndOptions)),
-            );
-          }
-          return [register(el, event, ...(listeners[i] as ListenerAndOptions))];
-        }),
+        ...events.flatMap(
+          (event: string | keyof WindowEventMap | keyof DocumentEventMap, i: number) => {
+            if (!mapping) {
+              return listeners.map((listener) =>
+                register(el, event, ...(listener as ListenerAndOptions)),
+              );
+            }
+            return [register(el, event, ...(listeners[i] as ListenerAndOptions))];
+          },
+        ),
       );
     },
     { immediate: true, flush: 'post' },

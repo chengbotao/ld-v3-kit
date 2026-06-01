@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es2019",
+    "module": "esnext",
+    "sourceMap": false,
+    "moduleResolution": "bundler",
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "rootDir": ".",
+    "types": [],
+    "paths": {
+      "@ld-v3-kit/components": ["./packages/components"],
+      "@ld-v3-kit/components/*": ["./packages/components/*"],
+      "@ld-v3-kit/utils": ["./packages/utils"],
+      "@ld-v3-kit/utils/*": ["./packages/utils/*"],
+      "@ld-v3-kit/composables": ["./packages/composables"],
+      "@ld-v3-kit/composables/*": ["./packages/composables/*"],
+      "ld-v3-kit": ["./packages/ld-v3-kit"]
+    },
+    "composite": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "lib": ["ES2019", "ES2022.Intl", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true
+  },
+  "include": ["packages", "packages/ld-v3-kit/package.json"],
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/__tests__/**/*",
+    "**/__demos__/**/*",
+    "**/style/**/*",
+    "**/*.md"
+  ]
+}

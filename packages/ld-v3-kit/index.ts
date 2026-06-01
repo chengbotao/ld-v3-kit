@@ -1,4 +1,4 @@
-import installer from './defaults.ts';
+import installer from './defaults';
 
 export * from '@ld-v3-kit/components';
 export * from '@ld-v3-kit/composables';

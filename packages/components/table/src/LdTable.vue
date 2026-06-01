@@ -220,39 +220,3 @@
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-  .ld-table {
-    width: 100%;
-    position: relative;
-    > * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    .el-table {
-      width: 100%;
-    }
-
-    .ld-table__pagination {
-      margin-top: 13px;
-      &.ld-table__pagination--custom {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      &.ld-table__pagination--left {
-        justify-content: flex-start;
-      }
-
-      &.ld-table__pagination--center {
-        justify-content: center;
-      }
-
-      &.ld-table__pagination--right {
-        justify-content: flex-end;
-      }
-    }
-  }
-</style>

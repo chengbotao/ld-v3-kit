@@ -115,6 +115,10 @@ export default defineConfig({
             text: 'useResizeObserver',
             link: '/useResizeObserver',
           },
+          {
+            text: 'useResizable',
+            link: '/useResizable',
+          },
         ],
       },
     ],

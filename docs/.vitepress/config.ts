@@ -152,6 +152,13 @@ export default defineConfig({
         },
       },
     },
+    ...(process.env.NODE_ENV !== 'production' && {
+      resolve: {
+        alias: {
+          'ld-v3-kit': path.resolve(__dirname, '../../packages/ld-v3-kit/index.ts'),
+        },
+      },
+    }),
   },
   markdown: {
     config: (md) => {

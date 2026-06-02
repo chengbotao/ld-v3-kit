@@ -218,6 +218,15 @@ importers:
 
   packages/styles:
     devDependencies:
+      lightningcss:
+        specifier: ^1.32.0
+        version: 1.32.0
+      lodash-unified:
+        specifier: ^1.0.3
+        version: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.18.1)(lodash@4.18.1)
+      sass-embedded:
+        specifier: ^1.100.0
+        version: 1.100.0
       vue:
         specifier: 'catalog:'
         version: 3.5.34(typescript@6.0.3)

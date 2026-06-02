@@ -1,13 +1,18 @@
 {
-    "name": "@ld-v3-kit/styles",
-    "version": "0.0.1",
-    "private": true,
-    "description": "Vue3 styles library",
-    "main": "index.ts",
-    "module": "index.ts",
-    "types": "index.d.ts",
-    "license": "MIT",
-    "devDependencies": {
-        "vue": "catalog:"
-    }
+  "name": "@ld-v3-kit/styles",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Vue3 styles library",
+  "main": "index.css",
+  "unpkg": "index.css",
+  "jsdelivr": "index.css",
+  "license": "MIT",
+  "scripts": {
+    "build": "jiti buildfile.ts"
+  },
+  "devDependencies": {
+    "lightningcss": "^1.32.0",
+    "lodash-unified": "^1.0.3",
+    "sass-embedded": "^1.100.0"
+  }
 }

@@ -4,13 +4,14 @@
  */
 
 // ==================== 导入依赖 ====================
-import { resolve } from 'path';
+import { resolve, join, basename, dirname } from 'path';
 import { glob } from 'tinyglobby';
 import { build, rolldown } from 'rolldown';
 import { dts } from 'rolldown-plugin-dts';
 import process from 'process';
 import { performance } from 'node:perf_hooks';
 import { styleText } from 'node:util';
+import { copyFile, cp, rm, mkdir } from 'fs/promises';
 import consola from 'consola';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -196,16 +197,13 @@ export function errorAndExit(err: Error): never {
   consola.error(err);
   process.exit(1);
 }
-
+type Awaitable<T> = Promise<T | T[]> | T;
 /**
  * 执行命令并记录时间
  * @param fnc 要执行的函数
  * @param overrideName 命令名称（可选）
  */
-export async function execCommand<T extends () => Promise<void> | void>(
-  fnc: T,
-  overrideName?: string,
-): Promise<void> {
+export async function execCommand<T extends () => Awaitable<void>>(fnc: T, overrideName?: string) {
   const commandName = styleText('cyan', overrideName || fnc.name);
   try {
     const startTime = performance.now();
@@ -383,6 +381,88 @@ async function buildFullEntry(minify: boolean): Promise<void> {
   ]);
 }
 
+const copyFiles = async () => {
+  // 确保目标目录存在
+  await mkdir(ldOutput, { recursive: true });
+
+  return Promise.all([
+    copyFile(ldPackage, join(ldOutput, 'package.json')),
+    copyFile(resolve(projRoot, 'README.md'), join(ldOutput, 'README.md')),
+    copyFile(resolve(projRoot, 'packages/ld-v3-kit', 'global.d.ts'), join(ldOutput, 'global.d.ts')),
+  ]);
+};
+
+const copyTypesDefinitions = () => {
+  const src = resolve(buildOutput, 'types');
+  const copyTypes = (module: Module) => {
+    return execCommand(
+      () => cp(src, buildConfig[module].output.path, { recursive: true }),
+      `copyTypes:${module}`,
+    );
+  };
+
+  return Promise.all([copyTypes('esm'), copyTypes('cjs')]);
+};
+
+/**
+ * 复制组件样式文件（SCSS 源码和编译后的 CSS）
+ */
+const copyComponentStyles = async () => {
+  // 先运行样式构建脚本生成 CSS 文件
+  const { build } = await import(resolve(projRoot, 'packages/styles/buildfile.ts'));
+
+  // 等待样式构建完成
+  await build();
+
+  const stylesDist = resolve(projRoot, 'packages/styles/dist');
+  const copyStyles = async (module: Module) => {
+    const outputPath = buildConfig[module].output.path;
+
+    // 扫描所有组件的 style 目录（只获取目录，不获取文件）
+    const componentDirs = await glob('*/style', {
+      cwd: resolve(projRoot, 'packages/components'),
+      absolute: true,
+      onlyDirectories: true,
+    });
+
+    for (const styleDir of componentDirs) {
+      // 获取组件名称（style目录的父目录名称）
+      const componentName = basename(dirname(styleDir));
+      const componentOutputDir = join(outputPath, 'components', componentName, 'style');
+
+      // 确保输出目录存在
+      await mkdir(componentOutputDir, { recursive: true });
+
+      // 复制 SCSS 源码
+      const scssFiles = await glob('*.scss', { cwd: styleDir, absolute: true });
+      for (const scssFile of scssFiles) {
+        const dest = join(componentOutputDir, basename(scssFile));
+        await copyFile(scssFile, dest);
+      }
+
+      // 复制编译后的 CSS（如果存在）
+      const cssFile = join(stylesDist, `ld-${componentName}.css`);
+      try {
+        const dest = join(componentOutputDir, `${componentName}.css`);
+        await copyFile(cssFile, dest);
+      } catch {
+        // CSS 文件可能不存在，忽略
+      }
+    }
+
+    consola.success(`Copied component styles to ${module}`);
+  };
+
+  return Promise.all([
+    execCommand(() => copyStyles('esm'), 'Copy Component Styles (ESM)'),
+    execCommand(() => copyStyles('cjs'), 'Copy Component Styles (CJS)'),
+  ]);
+};
+
+const cleanupTypesDefinitions = () => {
+  return rm(resolve(buildOutput, 'types'), { recursive: true });
+};
+
 // ==================== 执行构建 ====================
 
 /**
@@ -393,4 +473,9 @@ Promise.all([
   execCommand(buildModulesComponents, 'Build Modules Components'),
   execCommand(() => buildFullEntry(true), 'Build Full Entry (Minified)'),
   execCommand(() => buildFullEntry(false), 'Build Full Entry (Unminified)'),
-]);
+  execCommand(copyFiles, 'Copy Files'),
+]).then(async () => {
+  await execCommand(copyTypesDefinitions, 'Copy Types Definitions');
+  await execCommand(copyComponentStyles, 'Copy Component Styles');
+  await execCommand(cleanupTypesDefinitions, 'Cleanup Types Definitions');
+});

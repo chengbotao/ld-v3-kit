@@ -1,0 +1,127 @@
+/**
+ * LD V3 Kit CSS 变量定义
+ * 所有组件共享的设计令牌
+ */
+
+:root {
+  // ==================== 颜色系统 ====================
+  
+  // 主色
+  --ld-color-primary: #409eff;
+  --ld-color-primary-light-3: #79bbff;
+  --ld-color-primary-light-5: #a0cfff;
+  --ld-color-primary-light-7: #c6e2ff;
+  --ld-color-primary-light-8: #d9ecff;
+  --ld-color-primary-light-9: #ecf5ff;
+  --ld-color-primary-dark-2: #337ecc;
+
+  // 功能色
+  --ld-color-success: #67c23a;
+  --ld-color-warning: #e6a23c;
+  --ld-color-danger: #f56c6c;
+  --ld-color-info: #909399;
+  --ld-color-error: #f56c6c;
+
+  // 文字颜色
+  --ld-text-color-primary: #303133;
+  --ld-text-color-regular: #606266;
+  --ld-text-color-secondary: #909399;
+  --ld-text-color-placeholder: #c0c4cc;
+  --ld-text-color-disabled: #c0c4cc;
+
+  // 边框颜色
+  --ld-border-color: #dcdfe6;
+  --ld-border-color-light: #e4e7ed;
+  --ld-border-color-lighter: #ebeef5;
+  --ld-border-color-extra-light: #f2f6fc;
+  --ld-border-color-dark: #d4d7de;
+  --ld-border-color-darker: #cdd0d6;
+
+  // 背景颜色
+  --ld-bg-color: #ffffff;
+  --ld-bg-color-page: #f2f3f5;
+  --ld-bg-color-overlay: #ffffff;
+
+  // 填充颜色
+  --ld-fill-color: #f0f2f5;
+  --ld-fill-color-light: #f5f7fa;
+  --ld-fill-color-lighter: #fafafa;
+  --ld-fill-color-extra-light: #fafcff;
+  --ld-fill-color-dark: #ebedf0;
+  --ld-fill-color-darker: #e6e8eb;
+  --ld-fill-color-blank: #ffffff;
+
+  // ==================== 边框 ====================
+  
+  --ld-border-width: 1px;
+  --ld-border-style: solid;
+  --ld-border-color-hover: var(--ld-border-color);
+  --ld-border-radius: 4px;
+  --ld-border-radius-small: 2px;
+  --ld-border-radius-round: 20px;
+  --ld-border-radius-circle: 100%;
+
+  // ==================== 间距 ====================
+  
+  --ld-spacing-xs: 4px;
+  --ld-spacing-sm: 8px;
+  --ld-spacing-md: 16px;
+  --ld-spacing-lg: 24px;
+  --ld-spacing-xl: 32px;
+
+  // ==================== 字体 ====================
+  
+  --ld-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  --ld-font-size-extra-small: 12px;
+  --ld-font-size-small: 13px;
+  --ld-font-size-base: 14px;
+  --ld-font-size-medium: 16px;
+  --ld-font-size-large: 18px;
+  --ld-font-size-extra-large: 20px;
+
+  // ==================== 行高 ====================
+  
+  --ld-line-height-extra-small: 20px;
+  --ld-line-height-small: 22px;
+  --ld-line-height-base: 24px;
+  --ld-line-height-medium: 26px;
+  --ld-line-height-large: 28px;
+  --ld-line-height-extra-large: 30px;
+
+  // ==================== 阴影 ====================
+  
+  --ld-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04),
+    0px 8px 20px rgba(0, 0, 0, 0.08);
+  --ld-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  --ld-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
+  --ld-box-shadow-dark: 0px 12px 30px 10px rgba(0, 0, 0, 0.2),
+    0px 4px 16px 4px rgba(0, 0, 0, 0.12);
+
+  // ==================== 过渡动画 ====================
+  
+  --ld-transition-duration: 0.3s;
+  --ld-transition-duration-fast: 0.2s;
+  --ld-transition-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ld-transition: all var(--ld-transition-duration) var(--ld-transition-function);
+  --ld-transition-fast: all var(--ld-transition-duration-fast) var(--ld-transition-function);
+
+  // ==================== 层级 ====================
+  
+  --ld-z-index-normal: 1;
+  --ld-z-index-top: 1000;
+  --ld-z-index-popper: 2000;
+  --ld-z-index-overlay: 3000;
+  --ld-z-index-dialog: 4000;
+  --ld-z-index-message: 5000;
+  --ld-z-index-notification: 6000;
+}
+
+// 暗黑模式变量（可选）
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --ld-bg-color: #141414;
+//     --ld-text-color-primary: #ffffff;
+//     // ...
+//   }
+// }

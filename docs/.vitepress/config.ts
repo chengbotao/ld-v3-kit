@@ -156,6 +156,7 @@ export default defineConfig({
       resolve: {
         alias: {
           'ld-v3-kit': path.resolve(__dirname, '../../packages/ld-v3-kit/index.ts'),
+          'ld-v3-kit/style': path.resolve(__dirname, '../../packages/styles/index.scss'),
         },
       },
     }),

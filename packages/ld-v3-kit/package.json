@@ -6,6 +6,7 @@
   "module": "es/index.mjs",
   "types": "es/index.d.ts",
   "license": "MIT",
+  "author": "Chengbotao",
   "exports": {
     ".": {
       "types": "./es/index.d.ts",

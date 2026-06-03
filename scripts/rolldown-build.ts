@@ -346,8 +346,9 @@ async function buildFullEntry(minify: boolean): Promise<void> {
   });
 
   // 获取版本号
-  const { version } = getPackageManifest(ldPackage);
+  const { version, author } = getPackageManifest(ldPackage);
   const banner = `/*! ${PKG_BRAND_NAME} v${version} */\n`;
+  const footer = `/* Follow me on GitHub! @${author} */`;
 
   await writeBundles(bundle, [
     // UMD 格式
@@ -362,6 +363,7 @@ async function buildFullEntry(minify: boolean): Promise<void> {
       },
       sourcemap: minify,
       banner,
+      footer,
       minify,
       comments: {
         jsdoc: false,
@@ -373,6 +375,7 @@ async function buildFullEntry(minify: boolean): Promise<void> {
       file: resolve(ldOutput, 'dist', formatBundleFilename('index.full', minify, 'mjs')),
       sourcemap: minify,
       banner,
+      footer,
       minify,
       comments: {
         jsdoc: false,
